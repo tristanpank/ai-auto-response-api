@@ -5,6 +5,8 @@ from dotenv import load_dotenv
 import openai
 from fastapi.middleware.cors import CORSMiddleware 
 
+# Set Docker container to 80:80
+
 load_dotenv()
 API_KEY = os.getenv("API_KEY")
 
