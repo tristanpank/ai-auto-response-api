@@ -3,6 +3,7 @@ from pydantic import BaseModel
 import os
 from dotenv import load_dotenv
 import openai
+from fastapi.middleware.cors import CORSMiddleware 
 
 load_dotenv()
 API_KEY = os.getenv("API_KEY")
@@ -28,3 +29,13 @@ def root(convo: Convo):
   messages = [*convo.context, convo.message]
   chat_completion = openai.ChatCompletion.create(model="gpt-3.5-turbo", messages=messages)
   return chat_completion
+
+origins = ['*']
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+) 
